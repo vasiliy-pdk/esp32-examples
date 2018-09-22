@@ -59,13 +59,21 @@ def handle_requests(s, handler):
     client, client_address = s.accept()
     print('client connected from', client_address)
     request = extract_request_params(client)
-    response = handler(request["method"], request["uri"])
-    response_length = len(response)
-    if response_length > 0:
-        sent_bytes = client.send(response)
-        print('Response send {} all: {}'.format(sent_bytes, sent_bytes == response_length))
+    sent_bytes = False
+
+    if request:
+        response = handler(request["method"], request["uri"])
+        response_length = len(response)
+        if response_length > 0:
+            client.send("HTTP/1.1 200 OK\r\n\r\n")
+            sent_bytes = client.send(response)
+            print('Response send {} all: {}'.format(sent_bytes, sent_bytes == response_length))
+
+    if not sent_bytes:
+        client.send("HTTP/1.1 400 BAD REQUEST\r\n")
 
     client.close()
+    print('Socket closed')
 
 
 def extract_request_params(client):
@@ -78,8 +86,14 @@ def extract_request_params(client):
         if not line or line == b'\r\n':
             break
 
-    method, uri = request_line.decode().strip().split()[0:2]
-    return {
-        'method': method,
-        'uri': uri
-    }
+    print('request line {}'.format(request_line))
+
+    try:
+        method, uri = request_line.decode().strip().split()[0:2]
+        return {
+            'method': method,
+            'uri': uri
+        }
+    except:
+        print('unknown request format')
+        return False
