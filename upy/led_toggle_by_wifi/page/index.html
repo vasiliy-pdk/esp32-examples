@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ESP32 led status</title>
+        <style>{styles}</style>
+    </head>
+    <body class="{led_status}">
+        <div class="toggler">
+          <span class="toggler__title">Led is {led_status}</span>
+          <form method="POST">
+            <button type="submit" class="toggler__button">Toggle!</button>
+          </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #e2e1e0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.On {
+  background: #f9f9f9;
+}
+
+.toggler {
+  font-size: 7vw;
+  min-width: 130px;
+  text-align: center;
+}
+
+.toggler__title {
+  display: inline-block;
+  font-size: 0.6em;
+  padding-bottom: 1em;
+  color: #5d5d5d;
+}
+
+.toggler__button {
+  width: 30vw;
+  height: 30vw;
+  border: none;
+  outline: none;
+  border-radius: 30vw;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #fff;
+  text-align: center;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.toggler__button:hover,
+.toggler__button:focus {
+  background: #0053ba;
+}
+
+.toggler__button:focus {
+    outline: none;
+}
+
+.toggler__button:active {
+    transform: scale(0.95);
+}
