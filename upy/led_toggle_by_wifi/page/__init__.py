@@ -1,4 +1,4 @@
-def render(variables):
+def render(**variables):
     return html_template.format(styles=styles, **variables)
 
 

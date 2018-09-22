@@ -22,7 +22,7 @@ def handle_request(method, uri):
     if led.is_on():
         led_status = 'On'
 
-    return page.render({'led_status': led_status})
+    return page.render(led_status=led_status)
 
 
 if len(config.SSID):
