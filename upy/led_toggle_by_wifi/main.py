@@ -1,23 +1,11 @@
+import config
 import led
 import server
-import config
+import page
+
 
 def start(ssid, password):
     server.init(ssid, password, handle_request)
-
-
-html = """
-<!DOCTYPE html>
-<html>
-    <head><title>ESP32 led status</title> </head>
-    <body> 
-      <h1>Led is %s</h1>
-      <form method="POST">
-        <button type="submit">Toggle the led!</button>
-      </form>
-    </body>
-</html>
-"""
 
 
 def handle_request(method, uri):
@@ -34,8 +22,7 @@ def handle_request(method, uri):
     if led.is_on():
         led_status = 'On'
 
-    response = html % led_status
-    return response
+    return page.render(led_status)
 
 
 if len(config.SSID):
