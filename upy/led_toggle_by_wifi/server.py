@@ -21,13 +21,9 @@ def connect(nic, ssid, password):
     while have_slept <= 10 and not nic.isconnected():
         utime.sleep(1)
         have_slept += 1
-        status = nic.status()
-        if status != network.STAT_CONNECTING:
-            print('Failed to connect with status {}. Reconnecting...'.format(status))
-        else:
-            print('Still connecting...')
+        print('Current network status {}. Still connecting...'.format(nic.status()))
 
-    if nic.status() == network.STAT_GOT_IP:
+    if nic.isconnected():
         ip_address = nic.ifconfig()[0]
         return ip_address
     else:
